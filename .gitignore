@@ -1,0 +1,13 @@
+build/
+dist/
+__pycache__/
+*.spec
+*.pyc
+*.pyo
+*.db
+.venv/
+env/
+venv/
+ENV/
+*.log
+inventory_backup_*.xlsx
