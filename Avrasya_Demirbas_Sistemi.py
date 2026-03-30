@@ -1713,6 +1713,7 @@ def filter_view():
     ik = filter_internal_code_var.get().strip().lower()
     tn = filter_turkish_name_var.get().strip().lower()
     col = filter_color_var.get().strip().lower()
+    cat = filter_category_var.get().strip().lower()
 
     rows = read_all_rows()
     out = []
@@ -1723,6 +1724,7 @@ def filter_view():
         if d and d not in str(r[3]).lower(): ok = False
         if k and k not in str(r[1]).lower(): ok = False
         if ik and ik not in str(r[2]).lower(): ok = False
+        if cat and cat not in str(r[7]).lower(): ok = False
         if tn and tn not in str(r[11] if len(r) > 11 else "").lower(): ok = False
         if col and col not in str(r[10] if len(r) > 10 else "").lower(): ok = False
         if ok: out.append(r)
@@ -1733,7 +1735,7 @@ def filter_view():
 
 def show_all():
     filter_campus_var.set(""); filter_room_var.set(""); filter_inventory_var.set("")
-    filter_turkish_name_var.set(""); filter_color_var.set("")
+    filter_turkish_name_var.set(""); filter_color_var.set(""); filter_category_var.set("")
     load_to_tree()
 
 # ---------- Export from Current View ----------
@@ -2346,7 +2348,7 @@ set_default_color_theme("blue")
 
 w = CTk()
 w.geometry("1800x1000")
-w.title("Avrasya Üniversitesi Demirbaş Takip Sistemi - Barkod Destekli")
+w.title("Avrasya Üniversitesi Demirbaş Takip Sistemi - V3.0 (Kategori Mevcut)")
 
 # ========== اضافه کردن لوگو به عنوان پنجره ==========
 try:
@@ -2364,7 +2366,7 @@ color_var = StringVar(); turkish_name_var = StringVar()
 filter_code_var = StringVar()
 filter_internal_code_var = StringVar()
 filter_campus_var = StringVar(); filter_room_var = StringVar(); filter_inventory_var = StringVar()
-filter_turkish_name_var = StringVar(); filter_color_var = StringVar()
+filter_turkish_name_var = StringVar(); filter_color_var = StringVar(); filter_category_var = StringVar()
 
 result_count_var = StringVar(value="Gösterim Sayısı: 0")
 info_var = StringVar()
@@ -2539,11 +2541,14 @@ CTkEntry(right_frame, textvariable=filter_inventory_var, width=200).place(x=180,
 CTkLabel(right_frame, text='Kullanan Personel Göre', font=("Arial", 12, "bold")).place(x=20, y=260)
 CTkEntry(right_frame, textvariable=filter_turkish_name_var, width=200).place(x=180, y=260)
 
+CTkLabel(right_frame, text='Kategoriye Göre', font=("Arial", 12, "bold")).place(x=20, y=300)
+CTkEntry(right_frame, textvariable=filter_category_var, width=200).place(x=180, y=300)
+
 # CTkLabel(right_frame, text='Renge Göre Filtrele').place(x=20, y=290)
 # CTkEntry(right_frame, textvariable=filter_color_var, width=200).place(x=180, y=290)
 
 CTkButton(right_frame, text='Filtrele', command=filter_view, width=120,
-          fg_color="#2962FF", hover_color="#0039CB" , font=("Arial", 14, "bold")).place(x=200, y=380)
+          fg_color="orange", hover_color="darkorange" , font=("Arial", 14, "bold")).place(x=200, y=380)
 CTkButton(right_frame, text='Tümünü Göster', command=show_all, width=120,
           fg_color="#2962FF", hover_color="#0039CB" , font=("Arial", 14, "bold")).place(x=200, y=420)
 
