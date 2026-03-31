@@ -1,8 +1,7 @@
-streamlit
+django>=4.2,<5.0
 pandas
 openpyxl
-fpdf
-python-barcode
 qrcode
 pillow
-matplotlib
+python-barcode
+fpdf
