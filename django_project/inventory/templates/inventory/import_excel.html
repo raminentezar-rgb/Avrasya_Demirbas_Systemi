@@ -1,0 +1,39 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}Veri Aktarımı | Avrasya Demirbaş{% endblock title %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h2 class="fw-bold" style="color: var(--primary-blue);">
+            <i class="fa-solid fa-file-import me-2"></i> Veri Aktarımı
+        </h2>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-7 col-md-10">
+        <div class="glass-card text-center p-5 shadow-lg border-primary">
+            <h4 class="mb-3 text-primary"><i class="fa-solid fa-file-excel fa-2x"></i></h4>
+            <h5 class="fw-bold text-dark mb-4">Excel (.xlsx) Dosyası Üzerinden Toplu Ekleme</h5>
+            <p class="text-muted small mb-4">
+                Var olan bir envanteri Excel formatında toplu olarak yükleyebilirsiniz. 
+                Sistem; "Adı, Cinsi, Renk, Adet" gibi sütun başlıklarını otomatik tanır.
+            </p>
+            
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-4 text-start">
+                    <label class="form-label fw-bold small text-muted">DOSYA SEÇİNİZ</label>
+                    {{ form.excel_file }}
+                </div>
+                
+                <button type="submit" class="btn btn-primary-custom w-100 py-3 mb-2" onclick="this.innerHTML='<i class=\'fa-solid fa-spinner fa-spin\'></i> Dosya İşleniyor...'; this.style.opacity='0.8';">
+                    <i class="fa-solid fa-rocket me-2"></i> Verileri İçe Aktar
+                </button>
+                <a href="{% url 'asset_list' %}" class="btn btn-light border w-100 py-2 mt-2">İptal Et ve Geri Dön</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

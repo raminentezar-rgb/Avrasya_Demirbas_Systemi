@@ -1,0 +1,93 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}
+    {% if object %}Demirbaş Düzenle{% else %}Yeni Demirbaş Kaydı{% endif %} | Avrasya
+{% endblock title %}
+
+{% block content %}
+<div class="row mb-4 justify-content-center">
+    <div class="col-lg-9 col-md-11 text-center">
+        <h2 class="fw-bold" style="color: var(--primary-blue);">
+            <i class="fa-solid {% if object %}fa-pen{% else %}fa-plus-circle{% endif %} me-2"></i> 
+            {% if object %}Demirbaş Düzenle: {{ object.code }}{% else %}Yeni Demirbaş Ekle{% endif %}
+        </h2>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-lg-9 col-md-11">
+        <div class="glass-card p-5 shadow-lg">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row g-4">
+            <div class="col-md-6">
+                <!-- Sol Kolon -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold fw-bold text-muted small">DEMİRBAŞ KODU*</label>
+                    {{ form.code }}
+                    {% if form.code.errors %}<div class="text-danger small mt-1">{{ form.code.errors|striptags }}</div>{% endif %}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold fw-bold text-muted small">DAHİLİ KOD</label>
+                    {{ form.internal_code }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold fw-bold text-muted small">MALZEME ADI (TÜRKÇE)*</label>
+                    {{ form.turkish_name }}
+                    {% if form.turkish_name.errors %}<div class="text-danger small mt-1">{{ form.turkish_name.errors|striptags }}</div>{% endif %}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-muted small">İNGİLİZCE AD (Opsiyonel)</label>
+                    {{ form.inventory_item }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-muted small">KATEGORİ*</label>
+                    {{ form.category }}
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <!-- Sağ Kolon -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-muted small">YERLEŞKE*</label>
+                    {{ form.campus }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-muted small">KAT</label>
+                    {{ form.floor }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-muted small">ODA / BÖLÜM*</label>
+                    {{ form.room }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-muted small">DURUM*</label>
+                    {{ form.status }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-muted small">RENK</label>
+                    {{ form.color }}
+                </div>
+            </div>
+
+            <div class="col-12 mt-4">
+                <label class="form-label fw-bold text-muted small">GÖRSEL YÜKLE</label>
+                {{ form.image }}
+                {% if object.image %}
+                    <div class="mt-2 text-muted small">
+                        Mevcut görsel: <a href="{{ object.image.url }}" target="_blank">Görüntüle</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <hr class="mt-5 mb-4">
+        
+        <div class="d-flex justify-content-end gap-3">
+            <a href="{% url 'asset_list' %}" class="btn border px-4 py-2 text-muted fw-bold bg-white">İptal</a>
+            <button type="submit" class="btn btn-primary-custom px-5 py-2">
+                <i class="fa-solid fa-save me-1"></i> Kaydet
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

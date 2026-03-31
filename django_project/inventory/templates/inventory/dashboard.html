@@ -1,0 +1,165 @@
+{% extends 'inventory/base.html' %}
+{% load static %}
+
+{% block title %}Gösterge Paneli | Avrasya Demirbaş{% endblock title %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h2 class="fw-bold mb-3" style="color: var(--primary-blue);"><i class="fa-solid fa-chart-line me-2"></i> Yönetim Paneli</h2>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-3 col-sm-6">
+        <div class="glass-card metric-card p-4">
+            <h2 id="totalAssets">{{ total_assets }}</h2>
+            <p>Toplam Varlık</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="glass-card metric-card p-4">
+            <h2>{{ total_categories }}</h2>
+            <p>Aktif Kategori</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="glass-card metric-card p-4">
+            <h2>{{ total_campuses }}</h2>
+            <p>Yerleşke</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="glass-card metric-card p-4">
+            <h2>{{ total_rooms }}</h2>
+            <p>Kayıtlı Oda</p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <div class="glass-card">
+            <h5 class="fw-bold mb-4" style="color: var(--primary-blue);">🏷️ Kategori Dağılımı</h5>
+            <div style="position: relative; height: 300px; width: 100%;">
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="glass-card">
+            <h5 class="fw-bold mb-4" style="color: var(--primary-blue);">📍 Yerleşke Dağılımı</h5>
+            <div style="position: relative; height: 300px; width: 100%;">
+                <canvas id="campusChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="glass-card">
+            <h5 class="fw-bold mb-4" style="color: var(--primary-blue);">🕒 Son Eklenen 10 Demirbaş</h5>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Kod</th>
+                            <th>Malzeme</th>
+                            <th>Yerleşke/Oda</th>
+                            <th>Kategori</th>
+                            <th>Tarih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for asset in recent_assets %}
+                        <tr>
+                            <td class="fw-bold text-primary">{{ asset.code }}</td>
+                            <td>{{ asset.turkish_name }}</td>
+                            <td><span class="badge bg-secondary">{{ asset.campus }}</span> / {{ asset.room }}</td>
+                            <td>{{ asset.category }}</td>
+                            <td>{{ asset.date|date:"d M Y" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center py-4 text-muted">Henüz kayıt yok.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-end mt-3">
+                <a href="{% url 'asset_list' %}" class="btn btn-primary-custom">Tüm Envanteri Gör <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const catData = {{ category_counts|safe }};
+        const campData = {{ campus_counts|safe }};
+
+        // Parse Data
+        const catLabels = catData.map(d => d.category);
+        const catValues = catData.map(d => d.count);
+
+        const campLabels = campData.map(d => d.campus);
+        const campValues = campData.map(d => d.count);
+
+        // Category Bar Chart
+        new Chart(document.getElementById('categoryChart'), {
+            type: 'bar',
+            data: {
+                labels: catLabels,
+                datasets: [{
+                    label: 'Adet',
+                    data: catValues,
+                    backgroundColor: 'rgba(41, 98, 255, 0.7)',
+                    borderColor: 'rgba(41, 98, 255, 1)',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false, // Disabling dynamic animation as requested
+                scales: { 
+                    y: { 
+                        beginAtZero: true,
+                        ticks: { precision: 0 }
+                    } 
+                }
+            }
+        });
+
+        // Campus Pie Chart
+        new Chart(document.getElementById('campusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: campLabels,
+                datasets: [{
+                    data: campValues,
+                    backgroundColor: [
+                        '#1e3a8a', '#3b82f6', '#93c5fd', '#d1d5db', '#000'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: false, // Disabling dynamic animation
+                cutout: '60%',
+                plugins: {
+                    legend: { position: 'right' }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
