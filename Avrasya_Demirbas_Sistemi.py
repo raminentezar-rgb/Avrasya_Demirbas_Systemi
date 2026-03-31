@@ -2348,7 +2348,7 @@ set_default_color_theme("blue")
 
 w = CTk()
 w.geometry("1800x1000")
-w.title("Avrasya Üniversitesi Demirbaş Takip Sistemi - V3.0 (Kategori Mevcut)")
+w.title("Avrasya Üniversitesi Demirbaş Takip Sistemi - V4.0 (Tüm Veriler Güncellendi)")
 
 # ========== اضافه کردن لوگو به عنوان پنجره ==========
 try:
