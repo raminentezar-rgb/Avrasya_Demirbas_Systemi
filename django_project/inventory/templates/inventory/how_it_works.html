@@ -1,0 +1,142 @@
+{% extends 'inventory/base.html' %}
+{% load static %}
+
+{% block title %}Sistem Rehberi | Avrasya Demirbaş{% endblock title %}
+
+{% block content %}
+<div class="row mb-5 justify-content-center text-center">
+    <div class="col-lg-8">
+        <h1 class="fw-bold display-5 mb-3" style="color: var(--primary-blue);">
+            <i class="fa-solid fa-graduation-cap me-2"></i> Sistem Kullanım Rehberi
+        </h1>
+        <p class="lead text-muted">Avrasya Üniversitesi Demirbaş Yönetim Sistemi'ne hoş geldiniz. Bu sistem, varlıklarınızı dijital dünyada uçtan uca yönetmeniz için tasarlanmıştır.</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- Section 1: Dashboard -->
+    <div class="col-md-6 col-lg-4">
+        <div class="glass-card p-4 h-100 shadow-sm border-0 transition-transform">
+            <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary-soft p-3 rounded-circle me-3">
+                    <i class="fa-solid fa-chart-pie fa-2x text-primary"></i>
+                </div>
+                <h4 class="fw-bold mb-0">İstatistiksel Dashboad</h4>
+            </div>
+            <p class="text-muted">Ana sayfada bulunan grafikler sayesinde, varlıklarınızın yerleşke ve kategori bazlı dağılımını gerçek zamanlı olarak takip edebilirsiniz.</p>
+            <ul class="list-unstyled mb-0 small text-muted">
+                <li><i class="fa-solid fa-check text-success me-2"></i> Toplam varlık sayısı</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Kategori yoğunluğu</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Son eklenen 10 demirbaş</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 2: Excel Import -->
+    <div class="col-md-6 col-lg-4">
+        <div class="glass-card p-4 h-100 shadow-sm border-0 transition-transform">
+            <div class="d-flex align-items-center mb-3">
+                <div class="bg-success-soft p-3 rounded-circle me-3">
+                    <i class="fa-solid fa-file-import fa-2x text-success"></i>
+                </div>
+                <h4 class="fw-bold mb-0">Akıllı Excel İçe Aktar</h4>
+            </div>
+            <p class="text-muted">Binlerce veriyi saniyeler içinde sisteme aktarın. Akıllı sütun eşleme sayesinde eksik veriler otomatik olarak tanımlanır.</p>
+            <ul class="list-unstyled mb-0 small text-muted">
+                <li><i class="fa-solid fa-check text-success me-2"></i> .xlsx formatı desteği</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Boş isimlerde akıllı yedekleme</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Hızlı toplu kayıt</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 3: QR & Barcode -->
+    <div class="col-md-6 col-lg-4">
+        <div class="glass-card p-4 h-100 shadow-sm border-0 transition-transform">
+            <div class="d-flex align-items-center mb-3">
+                <div class="bg-info-soft p-3 rounded-circle me-3">
+                    <i class="fa-solid fa-qrcode fa-2x text-info"></i>
+                </div>
+                <h4 class="fw-bold mb-0">QR ve Barkod Üretimi</h4>
+            </div>
+            <p class="text-muted">Her demirbaş için benzersiz QR kodlar ve standart barkodlar üretilir. Bu kodlar üzerinden varlığın tüm detaylarına anında erişilebilir.</p>
+            <ul class="list-unstyled mb-0 small text-muted">
+                <li><i class="fa-solid fa-check text-success me-2"></i> PDF formatında fiş basımı</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Kurumsal logolu raporlar</li>
+                <li><i class="fa-solid fa-check text-success me-2"></i> Oda bazlı QR listeleri</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 4: Inventory Management -->
+    <div class="col-md-6 col-lg-4">
+        <div class="glass-card p-4 h-100 shadow-sm border-0 transition-transform">
+            <div class="d-flex align-items-center mb-3">
+                <div class="bg-warning-soft p-3 rounded-circle me-3">
+                    <i class="fa-solid fa-boxes-stacked fa-2x text-warning"></i>
+                </div>
+                <h4 class="fw-bold mb-0">Envanter Takibi</h4>
+            </div>
+            <p class="text-muted">Arama ve filtreleme seçenekleri ile aradığınız herhangi bir demirbaşa anında ulaşın. Düzenleme ve silme işlemlerini yetki dahilinde gerçekleştirin.</p>
+        </div>
+    </div>
+
+    <!-- Section 5: Room Management -->
+    <div class="col-md-6 col-lg-4">
+        <div class="glass-card p-4 h-100 shadow-sm border-0 transition-transform">
+            <div class="d-flex align-items-center mb-3">
+                <div class="bg-danger-soft p-3 rounded-circle me-3">
+                    <i class="fa-solid fa-door-open fa-2x text-danger"></i>
+                </div>
+                <h4 class="fw-bold mb-0">Oda Görünümü</h4>
+            </div>
+            <p class="text-muted">Belirli bir odayı seçerek o odadaki tüm demirbaşların listesini alabilir ve odanın "Demirbaş Listesi PDF" çıktısını oluşturabilirsiniz.</p>
+        </div>
+    </div>
+
+    <!-- Section 6: User Interface -->
+    <div class="col-md-6 col-lg-4">
+        <div class="glass-card p-4 h-100 shadow-sm border-0 transition-transform">
+            <div class="d-flex align-items-center mb-3">
+                <div class="bg-dark-soft p-3 rounded-circle me-3">
+                    <i class="fa-solid fa-laptop-code fa-2x text-dark"></i>
+                </div>
+                <h4 class="fw-bold mb-0">Modern Arayüz</h4>
+            </div>
+            <p class="text-muted">Glassmorphism ve modern renk paletleri ile hazırlanan arayüzümüz, uzun saatler boyunca yorulmadan çalışmanızı sağlar.</p>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="glass-card p-5 shadow-lg border-0 bg-primary-gradient text-white text-center rounded-4">
+            <h2 class="fw-bold mb-4">Sorumluluk ve Mülkiyet</h2>
+            <p class="lead mb-4">Bu sistem, Avrasya Üniversitesi'nin kurumsal varlıklarını korumak ve yönetmek amacıyla geliştirilmiştir. Sistem üzerinden yapılan tüm işlemler kayıt altına alınmakta olup, bilgi güvenliği standartlarına uygundur.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{% url 'dashboard' %}" class="btn btn-light btn-lg rounded-pill px-5 fw-bold text-primary shadow">Genel Bakışa Başla</a>
+                <a href="{% url 'asset_list' %}" class="btn btn-outline-light btn-lg rounded-pill px-5 fw-bold">Envanteri İncele</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.bg-primary-soft { background: rgba(13, 110, 253, 0.1); }
+.bg-success-soft { background: rgba(25, 135, 84, 0.1); }
+.bg-info-soft { background: rgba(13, 202, 240, 0.1); }
+.bg-warning-soft { background: rgba(255, 193, 7, 0.1); }
+.bg-danger-soft { background: rgba(220, 53, 69, 0.1); }
+.bg-dark-soft { background: rgba(33, 37, 41, 0.1); }
+
+.bg-primary-gradient {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+}
+
+.transition-transform:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+}
+</style>
+
+{% endblock %}

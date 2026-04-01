@@ -32,8 +32,11 @@
             <li class="{% if '/add/' in request.path %}active{% endif %}">
                 <a href="{% url 'asset_create' %}"><i class="fa-solid fa-plus-circle"></i> Yeni Kayıt</a>
             </li>
-            <li class="{% if '/rooms/' in request.path %}active{% endif %}">
+            <li class="{% if request.resolver_match.url_name == 'room_view' %}active{% endif %}">
                 <a href="{% url 'room_view' %}"><i class="fa-solid fa-door-open"></i> Oda Görünümü</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'how_it_works' %}active{% endif %}">
+                <a href="{% url 'how_it_works' %}"><i class="fa-solid fa-circle-question"></i> Sistem Rehberi</a>
             </li>
             <li class="{% if '/import/' in request.path %}active{% endif %}">
                 <a href="{% url 'import_excel' %}"><i class="fa-solid fa-file-import"></i> İçe Aktar</a>
@@ -59,9 +62,48 @@
             {% endfor %}
         {% endif %}
 
-        <div class="content-wrapper">
+        <div class="content-wrapper flex-grow-1">
             {% block content %}{% endblock %}
         </div>
+
+        <footer class="main-footer mt-5">
+            <div class="footer-content">
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-4 col-md-12 text-center text-lg-start">
+                        <div class="footer-brand d-flex align-items-center justify-content-center justify-content-lg-start mb-3">
+                            <img src="{% static 'img/LOGO1.png' %}" alt="Logo" class="footer-logo me-2">
+                            <h5 class="fw-bold mb-0">AVRASYA ÜNİVERSİTESİ</h5>
+                        </div>
+                        <p class="text-muted small">Kurumsal Demirbaş Yönetim ve Takip Sistemi. Üniversite varlıklarının verimli yönetimi için dijitalleştirilmiş çözüm.</p>
+                    </div>
+                    <div class="col-lg-4 col-md-6 text-center">
+                        <h6 class="fw-bold mb-3">Hızlı Bağlantılar</h6>
+                        <ul class="list-unstyled footer-links">
+                            <li><a href="{% url 'dashboard' %}">Gösterge Paneli</a></li>
+                            <li><a href="{% url 'asset_list' %}">Envanter Listesi</a></li>
+                            <li><a href="{% url 'room_view' %}">Oda Görünümü</a></li>
+                            <li><a href="{% url 'how_it_works' %}">Sistem Rehberi</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-md-6 text-center text-lg-end">
+                        <h6 class="fw-bold mb-3">İletişim & Destek</h6>
+                        <p class="text-muted small mb-1"></p>Avrasya Üniversitesi Bilgi İşlemleri</p>
+                        <p class="text-muted small mb-1">bilgiislem@avrasya.edu.tr</p>
+                        <p class="text-muted small mb-1">ramin.entezam@avrasya.edu.tr</p>
+                        <div class="social-links mt-3">
+                            <a href="#" class="me-2 text-muted"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="#" class="me-2 text-muted"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="me-2 text-muted"><i class="fa-brands fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <hr class="footer-divider">
+                <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center">
+                    <p class="mb-0 text-muted small">&copy; {% now "Y" %} Avrasya Üniversitesi. Tüm hakları saklıdır.</p>
+                    <p class="mb-0 text-muted small">Developed for <strong>Avrasya IT Department</strong></p>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <!-- Bootstrap JS -->

@@ -255,3 +255,9 @@ def print_room_qr_view(request):
         pdf_url = create_room_pdf(room, list(assets))
         return HttpResponseRedirect(pdf_url)
     return redirect('room_view')
+
+def how_it_works(request):
+    """
+    Sistem Rehberi ve Kullanım Kılavuzu Görünümü
+    """
+    return render(request, 'inventory/how_it_works.html')

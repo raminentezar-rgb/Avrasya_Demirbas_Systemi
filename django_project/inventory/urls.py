@@ -13,4 +13,5 @@ urlpatterns = [
     path('assets/<uuid:pk>/barcode/', views.generate_barcode_view, name='generate_barcode'),
     path('rooms/', views.room_view, name='room_view'),
     path('rooms/qr/', views.print_room_qr_view, name='print_room_qr'),
+    path('how-it-works/', views.how_it_works, name='how_it_works'),
 ]
