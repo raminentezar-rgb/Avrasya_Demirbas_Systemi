@@ -41,6 +41,9 @@
             <li class="{% if '/import/' in request.path %}active{% endif %}">
                 <a href="{% url 'import_excel' %}"><i class="fa-solid fa-file-import"></i> İçe Aktar</a>
             </li>
+            <li class="mt-4">
+                <a href="{% url 'logout' %}" class="text-danger fw-bold"><i class="fa-solid fa-right-from-bracket"></i> Çıkış Yap</a>
+            </li>
         </ul>
     </nav>
 
